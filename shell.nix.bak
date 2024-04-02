@@ -1,0 +1,98 @@
+{ pkgs ? import <nixpkgs> {
+    config.allowUnfree = true;
+    config.segger-jlink.acceptLicense = true;
+    config.cudaSupport = true;
+} }:
+
+let
+
+unstable = import <nixos-unstable> { config = { allowUnfree = true; config.cudaSupport = true; }; };
+
+youtube_dl = pkgs.python311Packages.buildPythonPackage rec {
+    name = "youtube_dl";
+    src = builtins.fetchGit {
+      url = "https://github.com/ytdl-org/youtube-dl";
+      ref = "refs/heads/master";
+    };
+    buildInputs = with pkgs.python311.pkgs; [
+        pip
+        setuptools
+        wheel
+    ];
+    doCheck = false;
+};
+
+
+whisperx = pkgs.python311Packages.buildPythonPackage rec {
+    name = "whisperx";
+    src = builtins.fetchGit {
+      url = "https://github.com/m-bain/whisperx";
+      ref = "refs/heads/main";
+    };
+    buildInputs = with pkgs.python311.pkgs; [
+        pip
+        setuptools
+        wheel
+        torch
+        torchaudio
+        faster-whisper
+        transformers
+        nltk
+    ];
+    doCheck = false;
+};
+
+pythonEnv = pkgs.python311.withPackages (p: with p; [
+    jupyter
+    ipython
+
+    soundfile
+    munch
+    pydub
+    pysrt
+    pyyaml
+    librosa
+    nltk
+    matplotlib
+    accelerate
+    transformers
+    einops
+    tqdm
+    typing
+    typing-extensions
+    phonemizer
+
+    torch
+    torchvision
+    torchaudio
+
+    whisperx
+    youtube_dl
+    ctranslate2
+    pandas
+    faster-whisper
+
+    unstable.pkgs.deepfilternet
+    unstable.pkgs.python311.pkgs.pyannote-audio
+]);
+
+in pkgs.mkShell {
+    buildInputs = [
+        unstable.pkgs.deepfilternet
+        pythonEnv
+    ];
+    shellHook = ''
+        PYTHONPATH=${pythonEnv}/${pythonEnv.sitePackages}
+        export CUDA_PATH=${pkgs.cudatoolkit}
+        export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.ncurses5}/lib
+        export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"
+        export EXTRA_CCFLAGS="-I/usr/include"
+        # jupyter notebook
+    '';
+
+    packages = with pkgs; [
+        unstable.pkgs.deepfilternet
+        ffmpeg
+        espeak-ng
+    ];
+}

@@ -1,0 +1,21 @@
+virtualenvs.in-project = true
+package-mode = false
+
+
+[tool.poetry]
+name = "styletts2finetune"
+version = "0.1.0"
+description = ""
+authors = ["Shiro836"]
+readme = "README.md"
+
+
+[tool.poetry.dependencies]
+python = "^3.11"
+whisperx = { git = "https://github.com/m-bain/whisperX.git", rev = "f2da2f8" }
+numpy = "^1.26.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
