@@ -3,6 +3,8 @@
 1. nix develop
 2. poetry shell
 
+download vod - ./twitch-dl -url="https://www.twitch.tv/videos/id" -q "Audio Only"
+
 # ---------------------------------------------------------------------------------------------------
 
 ### Original README

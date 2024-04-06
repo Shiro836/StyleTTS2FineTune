@@ -2,3 +2,7 @@
 
 *.wav
 *.m4a
+*.mp4a
+twitch-downloader
+prepare_wavs/inputs
+prepare_wavs/datasets

@@ -11,9 +11,11 @@ readme = "README.md"
 
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "3.11.*"
 whisperx = { git = "https://github.com/m-bain/whisperX.git", rev = "f2da2f8" }
-numpy = "^1.26.4"
+numpy = "1.26.4"
+pyannote-audio = "3.1.1"
+deepfilternet = "0.5.6"
 
 
 [build-system]
