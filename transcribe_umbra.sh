@@ -1,1 +1,0 @@
-whisperx umbra_denoised_normalized.wav --output_dir transcriptions/umbra --diarize --language en --model large-v3 --hf_token "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" --align_model WAV2VEC2_ASR_LARGE_LV60K_960H --initial_prompt "Hey, I'm Michal from MadMonq and we're on our way to see Forsen. Hello, I am Forsen, the best gamer in the world."
