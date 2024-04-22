@@ -3,6 +3,7 @@ update youtube-dl binary in folder from here - https://github.com/ytdl-org/ytdl-
 ```sh
 go run . --youtube_url="https://www.youtube.com/watch?v=MpjSRABe8h0" --output_folder="okayeg"
 go run . --youtube_url="https://www.youtube.com/watch?v=ozOoONmJ9EQ" --output_folder="madmonq"
+go run . --youtube_url="https://www.youtube.com/watch?v=k_skfzMMyso" --output_folder="gura"
 
 go run . --twitch_url="https://www.twitch.tv/videos/2057790113" --output_folder="umbra"
 go run . --twitch_url="https://www.twitch.tv/videos/2089449778" --output_folder="eddie"
@@ -13,4 +14,5 @@ go run . --twitch_url="https://www.twitch.tv/videos/2107195377" --output_folder=
 go run . --twitch_url="https://www.twitch.tv/videos/2105729294" --output_folder="geralt"
 go run . --twitch_url="https://www.twitch.tv/videos/2103046553" --output_folder="forsen"
 go run . --twitch_url="https://www.twitch.tv/videos/2087830892" --output_folder="forsen2"
+go run . --twitch_url="https://www.twitch.tv/videos/2115334374" --output_folder="neuro"
 ```

@@ -61,7 +61,7 @@ func craftDataset(ctx context.Context, dirs []string) {
 	trainFile := strings.Builder{}
 	valFile := strings.Builder{}
 
-	for _, dir := range dirs {
+	for speakerID, dir := range dirs {
 		files, err := os.ReadDir(path.Join(dir, segments))
 		if err != nil {
 			log.Fatalf("error reading directory %s", path.Join(dir, segments))
@@ -110,7 +110,7 @@ func craftDataset(ctx context.Context, dirs []string) {
 				fileToWrite = &valFile
 			}
 
-			_, err = fileToWrite.WriteString(fmt.Sprintf("%s|%s\n", nextFileName, strings.TrimSpace(string(transcription))))
+			_, err = fileToWrite.WriteString(fmt.Sprintf("%s|%s|%d\n", nextFileName, strings.TrimSpace(string(transcription)), speakerID))
 			if err != nil {
 				log.Fatalf("error writing to final trans file")
 			}

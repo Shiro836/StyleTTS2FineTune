@@ -96,7 +96,8 @@
                     ];
 
                     shellHook = ''
-                        export PYTHONPATH="${pythonEnv}/${pythonEnv}/bin/python"/${pythonEnv.sitePackages}
+                        # export PYTHONPATH="${pythonEnv}/${pythonEnv}/bin/python"/${pythonEnv.sitePackages}
+                        export PYTHONPATH="${pythonEnv.sitePackages}"
                         export CUDA_PATH=${pkgs.cudatoolkit}
                         export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.ncurses5}/lib:${pkgs.zlib}/lib:${pkgs.stdenv.cc.cc.lib}/lib
                         export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"

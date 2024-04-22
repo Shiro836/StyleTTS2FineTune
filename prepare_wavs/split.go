@@ -47,7 +47,17 @@ func split(dir string) {
 			continue
 		}
 
-		audioSegment, err := audio.Slice(max(0, time.Duration(segment.Start*float64(time.Second))-time.Millisecond*90), time.Duration(segment.End*float64(time.Second))+time.Millisecond*90)
+		start := time.Duration(segment.Start*float64(time.Second)) - time.Millisecond*90
+		start = max(0, start)
+
+		end := time.Duration(segment.End*float64(time.Second)) + time.Millisecond*90
+		end = min(audio.Duration(), end)
+
+		if start >= end {
+			continue
+		}
+
+		audioSegment, err := audio.Slice(start, end)
 		if err != nil {
 			log.Fatal("failed to slice audio segment:", err)
 		}
